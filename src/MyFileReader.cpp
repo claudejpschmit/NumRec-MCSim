@@ -24,79 +24,77 @@
 
 // Constructor
 MyFileReader::MyFileReader( string filename )
-	:
-	m_isValid(false)
+    :
+        m_isValid(false)
 {
-	vector<double> list;
-	ifstream file;
-	char buffer[256];
+    vector<double> list;
+    ifstream file;
+    char buffer[256];
 
-	int nrows=0;
-	int ncols=0;
+    int nrows=0;
+    int ncols=0;
 
-	try { file.open(filename.c_str()); }
-	catch( int e ) { cout << "Exception " << filename << " not open" << endl; }
+    try { file.open(filename.c_str()); }
+    catch( int e ) { cout << "Exception " << filename << " not open" << endl; }
 
-	//string text = NULL;
-
-	
-
-	while (!file.eof()) {
-		nrows++;
-		file.getline(buffer, 256);
-		string line(buffer);
-		istringstream line_stream(line);
+    //string text = NULL;
 
 
-		do {
-			ncols++;
-			double element;
-			line_stream >> element;
-			list.push_back(element);
-		} while (line_stream);
-		ncols--;
-		list.pop_back();
-	}
-	ncols = ncols/nrows;
-	m_M = new mat( nrows, ncols );
-	m_isValid= true ;
 
-	for( int irow=0; irow<nrows; ++irow ) {
-		for( int icol=0; icol< ncols; ++icol ) {
-			int ind = irow*ncols+icol ;
-			m_M->at(irow,icol) = list[ind];
-			//m_M->setElement(irow,icol,list[ind]) ;
-		}
-	}
+    while (!file.eof()) {
+        nrows++;
+        file.getline(buffer, 256);
+        string line(buffer);
+        istringstream line_stream(line);
 
-	if ( file != NULL ) file.close();
+
+        do {
+            ncols++;
+            double element;
+            line_stream >> element;
+            list.push_back(element);
+        } while (line_stream);
+        ncols--;
+        list.pop_back();
+    }
+    ncols = ncols/nrows;
+    m_M = new mat( nrows, ncols );
+    m_isValid= true ;
+
+    for( int irow=0; irow<nrows; ++irow ) {
+        for( int icol=0; icol< ncols; ++icol ) {
+            int ind = irow*ncols+icol ;
+            m_M->at(irow,icol) = list[ind];
+            //m_M->setElement(irow,icol,list[ind]) ;
+        }
+    }
+
+    if ( file != NULL ) file.close();
 
 }
 
 //Get a column
 mat MyFileReader::getColumn( int icol)
 {
-	if( (icol >= 0) && (icol < m_M->n_cols) ) {
-		return m_M->col(icol) ;
-		
-	}
-	else {
-		return NULL;
-	}
+    if( (icol >= 0) && (icol < m_M->n_cols) ) {
+        return m_M->col(icol) ;
+
+    }
+    else {
+        return NULL;
+    }
 }
 
 
 // Print out data set
 void MyFileReader::print() {
-	if( m_isValid ) {
-		string msg = "Dataset rows= ";
-		cout << msg << endl;
+    if( m_isValid ) {
+        string msg = "Dataset rows= ";
+        cout << msg << endl;
 
-		cout << *m_M << endl;
-		//m_M->printIt();
-	}
-	else
-		cout << "Data set is not valid" << endl;
+        cout << *m_M << endl;
+        //m_M->printIt();
+    }
+    else
+        cout << "Data set is not valid" << endl;
 }
-
-
