@@ -1,4 +1,3 @@
-#include "Preamble.h"
 #include "MyMinimizer.h"
 #include "MyFileReader.h"
 
