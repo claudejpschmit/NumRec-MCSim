@@ -1,11 +1,25 @@
 cmake_minimum_required(VERSION 2.8)
 project(MCSIMULATION)
+message(status "${CMAKE_CURRENT_SOURCE_DIR}")
 include_directories(src include)
 set(HEADER_FILES includes/Interface.h includes/LinearTheory.h includes/MyChiSquared.h includes/MyFileReader.h includes/MyMinimizer.h includes/Preamble.h)
 
-message(status "${CMAKE_CURRENT_SOURCE_DIR}")
+find_package(Boost 1.53)
+ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) 
+message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
+message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
+message(status "** Boost Libraries: ${Boost_LIBRARIES}")
+
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
+LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+
+set(Boost_USE_STATIC_LIBS        OFF)
+set(Boost_USE_MULTITHREADED      ON)
+set(Boost_USE_STATIC_RUNTIME     OFF)
+set(BOOST_ALL_DYN_LINK           ON)   # force dynamic linking for all libraries
+
 add_executable(MCSim src/Main.cpp src/LinearTheory.cpp src/MyChiSquared.cpp src/MyFileReader.cpp src/MyMinimizer.cpp ${HEADER_FILES})
-target_link_libraries(MCSim -lm)
+target_link_libraries(MCSim -lm ${Boost_LIBRARIES})
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -19,22 +33,10 @@ endif(DOXYGEN_FOUND)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
     message(status "Setting GCC flags")
+
+    # Remove the -g flag when not debugging
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O2 -Wall -Wextra -W -pedantic -std=c++0x")
 else()
     message(status "Setting MSVC flags")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHc-")
 endif()
-
-find_package(Boost 1.53 COMPONENTS unit_test_framework REQUIRED)
-ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) 
-message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
-message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
-message(status "** Boost Libraries: ${Boost_LIBRARIES}")
-
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
-
-set(Boost_USE_STATIC_LIBS        OFF)
-set(Boost_USE_MULTITHREADED      ON)
-set(Boost_USE_STATIC_RUNTIME     OFF)
-set(BOOST_ALL_DYN_LINK           ON)   # force dynamic linking for all libraries
