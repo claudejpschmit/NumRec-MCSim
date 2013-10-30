@@ -56,7 +56,7 @@ CMAKE_BINARY_DIR = /home/claude/Projects/MCSimulation/build
 CMakeFiles/MCSim.dir/all:
 	$(MAKE) -f CMakeFiles/MCSim.dir/build.make CMakeFiles/MCSim.dir/depend
 	$(MAKE) -f CMakeFiles/MCSim.dir/build.make CMakeFiles/MCSim.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/claude/Projects/MCSimulation/build/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/claude/Projects/MCSimulation/build/CMakeFiles  1 2 3 4 5
 	@echo "Built target MCSim"
 .PHONY : CMakeFiles/MCSim.dir/all
 
@@ -66,7 +66,7 @@ all: CMakeFiles/MCSim.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MCSim.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/claude/Projects/MCSimulation/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/claude/Projects/MCSimulation/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/MCSim.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/claude/Projects/MCSimulation/build/CMakeFiles 0
 .PHONY : CMakeFiles/MCSim.dir/rule

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(MCSIMULATION)
 include_directories(src include)
-set(HEADER_FILES include/Interface.h include/LinearTheory.h include/MyChiSquared.h include/MyFileReader.h include/MyMinimizer.h include/Preamble.h)
+set(HEADER_FILES includes/Interface.h includes/LinearTheory.h includes/MyChiSquared.h includes/MyFileReader.h includes/MyMinimizer.h includes/Preamble.h)
 
 message(status "${CMAKE_CURRENT_SOURCE_DIR}")
 add_executable(MCSim src/Main.cpp src/LinearTheory.cpp src/MyChiSquared.cpp src/MyFileReader.cpp src/MyMinimizer.cpp ${HEADER_FILES})
