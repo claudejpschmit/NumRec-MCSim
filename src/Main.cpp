@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
     test(1,0) = 0;
     test(0,1) = 0;
     test(1,1) = 1;
-
+    
+    //hello
     cout << test << endl;
     return 0;
 }
