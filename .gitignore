@@ -11,3 +11,6 @@
 *.lai
 *.la
 *.a
+
+# Build directory, it should not be in the repo
+build
