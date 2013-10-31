@@ -22,6 +22,10 @@ find_package(Armadillo REQUIRED)
 INCLUDE_DIRECTORIES(${ARMADILLO_INCLUDE_DIRS})
 LINK_DIRECTORIES(${ARMADILLO_LIBRARIES})
 
+find_package(Minuit2 REQUIRED)
+INCLUDE_DIRECTORIES($(includedir)/Minuit2)
+LINK_DIRECTORIES($(libdir)/Minuit2)
+
 add_executable(MCSimulation src/Main.cpp src/LinearTheory.cpp src/MyChiSquared.cpp src/MyFileReader.cpp src/MyMinimizer.cpp ${HEADER_FILES})
 target_link_libraries(MCSimulation -lm ${Boost_LIBRARIES})
 target_link_libraries(MCSimulation -lm ${ARMADILLO_LIBRARIES})
