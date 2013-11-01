@@ -1,6 +1,8 @@
 #include "MyMinimizer.h"
 #include "MyFileReader.h"
+#include "MyChiSquared.h"
 #include "MyPdf.h"
+//#include "Minuit2Minimizer.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,15 +27,27 @@ int main(int argc, char *argv[])
     cout << test << endl;
    
     cout << "----test pdf" << endl;
-    MyPdf pdf(1400.0, 1.0, 20.0);
-   
-    double testpdf = pdf.drawNextValueNoise(0.0);
+    MyPdf pdf(1.4, 0.1, 6.0);
+    
+    vector<double> distribution;
+    for (int i = 0; i < 1000; ++i){
+        distribution.push_back(pdf.drawNextValueNoise(0.0));
+    }
+    
+    FILE * pFile;
+    pFile = fopen("distribution.txt","w");
+    for (int i = 0; i < 1000; ++i){
+        fprintf(pFile,"%f\n",distribution[i]);
+    }
+    fclose (pFile);
 
-    cout << testpdf << endl;
 
 
     cout << "----test file reader" << endl;    
     cout << inputstring << endl;
+    
+    MyFileReader file(inputstring);
+
 
 
     return 0;

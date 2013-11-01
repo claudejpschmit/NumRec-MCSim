@@ -7,7 +7,7 @@
  * MyPdf.cpp the definitions of all member functions of the class MyPdf.
  *
  */
-
+#define PI 3.1415
 
 MyPdf::MyPdf(double tau, double A, double t_max)
     :
@@ -15,7 +15,7 @@ MyPdf::MyPdf(double tau, double A, double t_max)
         A(A),
         t_max(t_max),
         //TODO: worry about units, omega = 300fs
-        omega(300)
+        omega(0.3)
 {
     // Throws errors when bad values are given.
     assert(t_max >= 0.0);
@@ -30,7 +30,7 @@ MyPdf::MyPdf(double tau, double A, double t_max)
 
 double MyPdf::evaluate(double t)
 {
-    return exp(-t/this->tau)*(1+A*sin(this->omega*t)); // evaluates the exponential at t
+    return exp(-t/this->tau)*(1+A*sin(2.0*PI*t/this->omega)); // evaluates the exponential at t
 }
 
 
