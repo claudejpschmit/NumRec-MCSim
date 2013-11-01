@@ -2,7 +2,21 @@
 #include "MyFileReader.h"
 #include "MyChiSquared.h"
 #include "MyPdf.h"
-//#include "Minuit2Minimizer.h"
+#include "MaxLikelihood.h"
+
+
+MaxLikelihood * theMaxLikelihoodObject = 0;
+
+void fcn(Int_t& npar, Double_t* deriv, Double_t& f, Double_t par[], Int_t flag) {
+    mat p(2,1);
+    p(0,0) = par[0];
+    p(1,0) = par[1];
+    theMaxLikelihoodObject->setParameters(p);
+    double result = theMaxLikelihoodObject->evaluate();
+    cout << " In FCN " << p(0,0) << " " << p(1,0) << "          result " << result << endl;
+    f = result;
+        
+}
 
 int main(int argc, char *argv[])
 {
@@ -48,7 +62,17 @@ int main(int argc, char *argv[])
     
     MyFileReader file(inputstring);
 
+    cout << "----likelihood" << endl;
 
+    TMinuit m_minuit(2);
+    m_minuit.SetFCN(fcn);
+    m_minuit.SetErrorDef(1.0);
+    m_minuit.SetPrintLevel(1);
+
+    m_minuit.DefineParameter();
+    m_minuit.DefineParameter();
+
+    m_minuit.Migrad();
 
     return 0;
 }
