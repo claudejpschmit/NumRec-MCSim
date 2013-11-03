@@ -12,7 +12,7 @@ MyChiSquared::MyChiSquared( mat xin, mat yin, mat ein )
         buffMatrix(i,i) = ein(i,0) * ein(i,0);
     }
 
-    inverseErrorMatrix = buffMatrix.i();
+inverseErrorMatrix = buffMatrix.i();
 }
 
 void MyChiSquared::setParameters( mat params )

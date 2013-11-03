@@ -28,7 +28,11 @@ class MyPdf
                  */
                 MyPdf(double tau, double A, double t_max);
 
-
+                /**
+                 * sets parameters tau and A in the pdf
+                 */
+                void setParameters(mat params);
+                
                 /**
                  * Gives a random value drawn from an exponential distribution multiplied by a sinusoid.
                  *
@@ -38,7 +42,6 @@ class MyPdf
                  */
                 double drawNextValueNoise(double noise);
 
-        private:
                 /**
                  * Evaluates the probability density function at a point in time t 
                  *

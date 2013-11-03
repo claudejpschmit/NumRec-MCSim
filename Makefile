@@ -22,8 +22,8 @@ LIBS       += $(ROOTLIBS) -lHtml -lThread -lMinuit -lRooFit -lRooFitCore -lMathC
 
 GARBAGE  = $(OBJDIR)/*.o *.so *.rootmap 
 
-SimpleFit : MinuitFit.cpp 
-	$(CXX) $(CXXFLAGS) $(LIBS) MinuitFit.cpp ../Filereader/MyFileReaderArma.cpp -o MinuitFit
+MCSimulation: Main.cpp LinearTheory.cpp MaxLikelihood.cpp MyChiSquared.cpp MyFileReader.cpp MyPdf.cpp 
+	$(CXX) $(CXXFLAGS) $(LIBS) Main.cpp LinearTheory.cpp MaxLikelihood.cpp MyChiSquared.cpp MyFileReader.cpp MyPdf.cpp -o MCSimulation
 
 clean   :
 	$(RM) $(GARBAGE)

@@ -64,13 +64,20 @@ int main(int argc, char *argv[])
 
     cout << "----likelihood" << endl;
 
+    mat distribution_Mat(1000,1);
+    for (int i = 0; i < 1000; ++i)
+        distribution_Mat(i,0) = distribution[i];
+
+    MaxLikelihood maxL(distribution_Mat, parameters, 6.0);
+    theMaxLikelihoodObject = &maxL;
+
     TMinuit m_minuit(2);
     m_minuit.SetFCN(fcn);
     m_minuit.SetErrorDef(1.0);
     m_minuit.SetPrintLevel(1);
 
-    m_minuit.DefineParameter();
-    m_minuit.DefineParameter();
+    m_minuit.DefineParameter(0, "tau", 1.4, 0.1, -10.0, 10.0);
+    m_minuit.DefineParameter(1, "A", 0.1, 0.1, -10.0, 10.0);
 
     m_minuit.Migrad();
 

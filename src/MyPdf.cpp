@@ -32,6 +32,11 @@ double MyPdf::evaluate(double t)
     return exp(-t/this->tau)*(1+A*sin(2.0*PI*t/this->omega))/(this->tau*(1-exp(-this->t_max/this->tau))); // evaluates the exponential at t
 }
 
+void MyPdf::setParameters(mat params)
+{
+    tau = params(0,0);
+    A = params(1,0);
+}
 
 double MyPdf::drawNextValueNoise(double noise)
 {
