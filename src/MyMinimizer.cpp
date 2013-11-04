@@ -15,7 +15,9 @@ MyMinimizer::MyMinimizer(double convLimit, int maxIterations, mat params, double
 {
     nParameters = parameters.n_rows;
     currentParameter = 0;
-    mat buffMatrix(parameters.n_rows,1,fill::zeros);
+    mat buffMatrix(parameters.n_rows,1);
+    for (int i = 0; i < parameters.n_rows; ++i)
+        buffMatrix(i,0) = 0;
     newParams = buffMatrix;
 }
 
