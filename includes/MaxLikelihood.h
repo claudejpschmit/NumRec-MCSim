@@ -1,7 +1,7 @@
 #include "Preamble.h"
+#include "MyPdf.h"
 
-
-class MaxLikelihood : {
+class MaxLikelihood {
 
 public:
     MaxLikelihood(mat data, mat initial_params, double tmax);
@@ -11,7 +11,8 @@ public:
     void setParameters(mat params);
 
 private:
-
+    MyPdf* pdf;
+    mat data;
     mat params; 
     int nDataPoints;
     double logLikelihood;

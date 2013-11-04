@@ -6,7 +6,12 @@ MyChiSquared::MyChiSquared( mat xin, mat yin, mat ein )
         yMeasured(yin)
 
 {
-    mat buffMatrix(ein.n_rows,ein.n_rows,fill::zeros); 
+    mat buffMatrix(ein.n_rows,ein.n_rows);
+    for (int i = 0; i < ein.n_rows; ++i)
+        for (int j = 0; j < ein.n_rows; ++i)
+            buffMatrix(i,j) = 0; 
+	
+
 
     for (int i = 0; i < ein.n_rows ; ++i){
         buffMatrix(i,i) = ein(i,0) * ein(i,0);

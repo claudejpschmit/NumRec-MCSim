@@ -3,7 +3,7 @@
 #include "MyChiSquared.h"
 #include "MyPdf.h"
 #include "MaxLikelihood.h"
-
+#include "TMinuit.h"
 
 MaxLikelihood * theMaxLikelihoodObject = 0;
 
@@ -67,6 +67,10 @@ int main(int argc, char *argv[])
     mat distribution_Mat(1000,1);
     for (int i = 0; i < 1000; ++i)
         distribution_Mat(i,0) = distribution[i];
+    
+    mat parameters(2,1);
+    parameters(0,0)=1.4;
+    parameters(1,0)=0.1;
 
     MaxLikelihood maxL(distribution_Mat, parameters, 6.0);
     theMaxLikelihoodObject = &maxL;
@@ -80,6 +84,8 @@ int main(int argc, char *argv[])
     m_minuit.DefineParameter(1, "A", 0.1, 0.1, -10.0, 10.0);
 
     m_minuit.Migrad();
+    
 
+    cout << "check progress -> done" << endl;
     return 0;
 }
