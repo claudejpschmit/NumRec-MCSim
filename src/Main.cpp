@@ -83,9 +83,31 @@ int main(int argc, char *argv[])
     m_minuit.DefineParameter(0, "tau", 1.4, 0.1, -10.0, 10.0);
     m_minuit.DefineParameter(1, "A", 0.1, 0.1, -10.0, 10.0);
 
-    m_minuit.Migrad();
-    
+    mat A_meas(500,1)
+    for (int i = 0; i < 500; ++i) {
+        //this was the code before
+        //m_minuit.Migrad();
+        //but Migrad returns a number of type Int_t???
+        //so that needs to be stored somewhere no?
+        A_meas(i,0) = m_minuit.Migrad();
 
+        // would I need to use:
+        // Int_t TMinuit::GetParameter(Int_t parNo, Double_t &currentValue, Double_t &currentError) const
+        // but what are currentValue and currentError? are they the addresses where the results will be
+        // stored? but then what does the function return?
+    }
+
+    // this is unnecessary,
+    // don't use a matrix to store intermediate values 
+    // don't have 2 for loops
+    ofstream output;
+    output.open("A_measured.txt");
+    for (int i = 0; i < 500; ++i) {
+        output << A_meas(i,0) << endl;
+    }
+    output.close();
+
+    // then use the python script to plot
     cout << "check progress -> done" << endl;
     return 0;
 }
